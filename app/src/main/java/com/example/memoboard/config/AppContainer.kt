@@ -13,7 +13,7 @@ interface AppContainer {
 
 class AppDataContainer(private val context: Context) : AppContainer {
     override val sectionRepository: SectionRepository by lazy {
-        // DBSectionRepository(MemoDatabase.getDatabase(context).sectionDao())
+         // DBSectionRepository(MemoDatabase.getDatabase(context).sectionDao())
         LocalSectionRepository(LocalSectionProvider)
     }
 }

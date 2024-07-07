@@ -1,5 +1,3 @@
 package com.example.memoboard.ui.navigation
 
-class MemoBoardNavGraph {
-
-}
+import androidx.compose.runtime.Composable

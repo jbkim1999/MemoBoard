@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui.text.google.fonts)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -81,4 +82,5 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
     implementation("com.github.jeziellago:compose-markdown:0.5.0")
+    implementation("me.onebone:toolbar-compose:2.3.5")
 }
