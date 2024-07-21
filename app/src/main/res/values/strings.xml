@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Memo Board</string>
+    <string name="append_title">Append to Section</string>
+    <string name="edit_title">Edit a Section</string>
 </resources>

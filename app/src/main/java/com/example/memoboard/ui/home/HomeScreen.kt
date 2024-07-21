@@ -12,8 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -40,14 +38,22 @@ import com.example.memoboard.MemoBoardTopAppBar
 import com.example.memoboard.R
 import com.example.memoboard.config.ViewModelProvider
 import com.example.memoboard.data.LocalSectionProvider
-import com.example.memoboard.data.Section
+import com.example.memoboard.data.Memo
 import com.example.memoboard.ui.FlexibleTopBar
+import com.example.memoboard.ui.navigation.NavigationDestination
 import com.example.memoboard.ui.theme.MemoBoardTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
+
+object HomeDestination : NavigationDestination {
+    override val route = "home"
+    override val titleRes = R.string.app_name
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    onSectionAppend: (Int) -> Unit = {},
+    onSectionEdit: (Int) -> Unit = {},
     viewModel: HomeViewModel = viewModel(factory = ViewModelProvider.Factory),
     modifier: Modifier = Modifier
 ) {
@@ -57,14 +63,13 @@ fun HomeScreen(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            FlexibleTopBar (
+            FlexibleTopBar(
                 modifier = Modifier.padding(top = 16.dp),
                 scrollBehavior = scrollBehavior,
                 content = {
                     MemoBoardTopAppBar(
                         title = "Memo Board",
                         canNavigateBack = false,
-                        titleClickedActionName = "Not yet implemented"
                     )
                 }
             )
@@ -79,6 +84,8 @@ fun HomeScreen(
             items(items = homeUiState.sections, key = { it.id }) { section ->
                 MarkdownCard(
                     section = section,
+                    onSectionAppend = onSectionAppend,
+                    onSectionEdit = onSectionEdit,
                     modifier = Modifier
                         .padding(horizontal = 16.dp, vertical = 8.dp)
                 )
@@ -89,10 +96,10 @@ fun HomeScreen(
 
 @Composable
 fun MarkdownCard(
-    section: Section,
-    onSectionClick: () -> Unit = {},
+    section: Memo,
     onSectionAppend: (Int) -> Unit = {},
     onSectionEdit: (Int) -> Unit = {},
+    onSectionClick: () -> Unit = {}, // Not yet supported
     modifier: Modifier = Modifier,
 ) {
     var isExpanded by remember { mutableStateOf(false) }

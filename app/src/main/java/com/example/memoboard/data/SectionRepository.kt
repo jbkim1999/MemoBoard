@@ -3,14 +3,14 @@ package com.example.memoboard.data
 import kotlinx.coroutines.flow.Flow
 
 // Contains datasource
-interface SectionRepository {
-    fun getAllSections(): Flow<List<Section>>
+interface MemoRepository {
+    fun getAllMemos(): Flow<List<Memo>>
 
-    fun getSectionById(id: Int): Flow<Section?>
+    fun getMemoById(id: Int): Flow<Memo?>
 
-    suspend fun insertSection(section: Section)
+    suspend fun insertMemo(section: Memo)
 
-    suspend fun updateSection(section: Section)
+    suspend fun updateMemo(section: Memo)
 
-    suspend fun deleteSection(section: Section)
+    suspend fun deleteMemo(section: Memo)
 }

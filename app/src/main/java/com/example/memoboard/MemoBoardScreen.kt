@@ -7,6 +7,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -14,7 +15,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
@@ -26,19 +28,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.memoboard.ui.home.HomeScreen
+import com.example.memoboard.ui.navigation.MemoBoardNavHost
 import com.example.memoboard.ui.theme.MemoBoardTheme
 
 @Composable
 fun MemoBoardScreen(navController: NavHostController = rememberNavController()) {
-    HomeScreen()
+    MemoBoardNavHost(
+        navController = rememberNavController(),
+        modifier = Modifier
+    )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MemoBoardTopAppBar(
     title: String,
@@ -65,7 +70,7 @@ fun MemoBoardTopAppBar(
     ) {
         OutlinedCard(
             modifier = modifier
-                .width(240.dp),
+                .width(260.dp),
             shape = RoundedCornerShape(16.dp),
         ) {
             Column(
@@ -76,6 +81,21 @@ fun MemoBoardTopAppBar(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                    if (canNavigateBack) {
+                        IconButton(
+                            onClick = { navigateUp },
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.baseline_arrow_back_ios_16),
+                                contentDescription = "back icon"
+                            )
+                        }
+                    } else {
+                        Spacer(
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
                     TextButton(
                         enabled = titleClickedActionName != "",
                         onClick = { titleClicked = !titleClicked },
@@ -92,6 +112,9 @@ fun MemoBoardTopAppBar(
                             style = MaterialTheme.typography.titleMedium,
                         )
                     }
+                    Spacer(
+                        modifier = Modifier.weight(1f)
+                    )
                 }
 
                 if (titleClicked) {
@@ -110,7 +133,11 @@ fun MemoBoardTopAppBar(
                             horizontalArrangement = Arrangement.Start
                         ) {
                             Text(
-                                modifier = Modifier.padding(start = 16.dp, top = 4.dp, bottom = 4.dp),
+                                modifier = Modifier.padding(
+                                    start = 16.dp,
+                                    top = 4.dp,
+                                    bottom = 4.dp
+                                ),
                                 text = titleClickedActionName,
                                 style = MaterialTheme.typography.bodyLarge,
                             )
@@ -128,7 +155,7 @@ fun MemoBoardTopAppBarPreview() {
     MemoBoardTheme {
         MemoBoardTopAppBar(
             title = "Hello World",
-            canNavigateBack = false
+            canNavigateBack = true
         )
     }
 }

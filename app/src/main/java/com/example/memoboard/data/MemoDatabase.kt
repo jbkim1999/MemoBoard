@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.memoboard.config.DateConverter
 
-@Database(entities = [Section::class], version = 1)
+@Database(entities = [Memo::class], version = 1)
 @TypeConverters(DateConverter::class)
 abstract class MemoDatabase : RoomDatabase() {
 

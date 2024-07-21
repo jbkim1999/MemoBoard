@@ -2,7 +2,7 @@ package com.example.memoboard.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.memoboard.data.Section
+import com.example.memoboard.data.Memo
 import com.example.memoboard.data.SectionRepository
 import kotlinx.coroutines.flow.SharingStarted
 
@@ -26,5 +26,5 @@ class HomeViewModel(
 }
 
 data class HomeUiState(
-    val sections: List<Section>
+    val sections: List<Memo>
 )

@@ -7,19 +7,19 @@ class LocalSectionRepository(
     private val localSectionProvider: LocalSectionProvider
 ) : SectionRepository {
 
-    override fun getAllSections(): Flow<List<Section>> {
+    override fun getAllSections(): Flow<List<Memo>> {
         return flowOf(localSectionProvider.getAllSections())
     }
 
-    override fun getSectionById(id: Int): Flow<Section?> {
+    override fun getSectionById(id: Int): Flow<Memo?> {
         return flowOf(localSectionProvider.getAllSections().find { it.id == id })
     }
 
-    override suspend fun insertSection(section: Section) {
+    override suspend fun insertSection(section: Memo) {
         localSectionProvider.getAllSections().add(section)
     }
 
-    override suspend fun updateSection(section: Section) {
+    override suspend fun updateSection(section: Memo) {
         val id = section.id
         val index = localSectionProvider.getAllSections().indexOfFirst { it.id == id }
         if (index != -1) {
@@ -27,7 +27,7 @@ class LocalSectionRepository(
         }
     }
 
-    override suspend fun deleteSection(section: Section) {
+    override suspend fun deleteSection(section: Memo) {
         val id = section.id
         val index = localSectionProvider.getAllSections().indexOfFirst { it.id == id }
         if (index != -1) {
