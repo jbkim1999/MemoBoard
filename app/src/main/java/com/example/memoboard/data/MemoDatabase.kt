@@ -11,7 +11,7 @@ import com.example.memoboard.config.DateConverter
 @TypeConverters(DateConverter::class)
 abstract class MemoDatabase : RoomDatabase() {
 
-    abstract fun sectionDao(): SectionDao
+    abstract fun memoDao(): MemoDao
 
     companion object {
         @Volatile

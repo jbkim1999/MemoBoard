@@ -23,8 +23,8 @@ fun MemoBoardNavHost(
         // route is just a string
         composable(route = HomeDestination.route) {
             HomeScreen(
-                onSectionAppend = { navController.navigate("${AppendDestination.route}/$it") },
-                onSectionEdit = { navController.navigate("${EditDestination.route}/$it") }
+                onMemoAppend = { navController.navigate("${AppendDestination.route}/$it") },
+                onMemoEdit = { navController.navigate("${EditDestination.route}/$it") }
             )
         }
     }

@@ -2,9 +2,9 @@ package com.example.memoboard.data
 
 import java.time.LocalDateTime
 
-object LocalSectionProvider {
+object LocalMemoProvider {
 
-    private val sectionList = mutableListOf<Memo>(
+    private val memoList = mutableListOf<Memo>(
         Memo(
             0, "BFS",
             """
@@ -40,7 +40,7 @@ object LocalSectionProvider {
         ),
     )
 
-    fun getAllSections(): MutableList<Memo> {
-        return sectionList
+    fun getAllMemos(): MutableList<Memo> {
+        return memoList
     }
 }

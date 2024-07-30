@@ -3,7 +3,7 @@ package com.example.memoboard.ui.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.memoboard.data.Memo
-import com.example.memoboard.data.SectionRepository
+import com.example.memoboard.data.MemoRepository
 import kotlinx.coroutines.flow.SharingStarted
 
 import kotlinx.coroutines.flow.StateFlow
@@ -11,11 +11,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class HomeViewModel(
-    private val sectionRepository: SectionRepository
+    private val memoRepository: MemoRepository
 ) : ViewModel() {
 
     val uiState: StateFlow<HomeUiState> =
-        sectionRepository.getAllSections().map {
+        memoRepository.getAllMemos().map {
             HomeUiState(it)
         }
             .stateIn(
@@ -26,5 +26,5 @@ class HomeViewModel(
 }
 
 data class HomeUiState(
-    val sections: List<Memo>
+    val memos: List<Memo>
 )

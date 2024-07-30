@@ -11,7 +11,7 @@ object ViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
             HomeViewModel(
-                memoBoardApplication().container.sectionRepository
+                memoBoardApplication().container.memoRepository
             )
         }
     }

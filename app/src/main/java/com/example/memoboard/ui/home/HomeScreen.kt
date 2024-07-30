@@ -37,12 +37,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.memoboard.MemoBoardTopAppBar
 import com.example.memoboard.R
 import com.example.memoboard.config.ViewModelProvider
-import com.example.memoboard.data.LocalSectionProvider
+import com.example.memoboard.data.LocalMemoRepository
+import com.example.memoboard.data.LocalMemoProvider
 import com.example.memoboard.data.Memo
 import com.example.memoboard.ui.FlexibleTopBar
 import com.example.memoboard.ui.navigation.NavigationDestination
 import com.example.memoboard.ui.theme.MemoBoardTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
+import kotlinx.coroutines.flow.first
 
 object HomeDestination : NavigationDestination {
     override val route = "home"
@@ -52,8 +54,8 @@ object HomeDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onSectionAppend: (Int) -> Unit = {},
-    onSectionEdit: (Int) -> Unit = {},
+    onMemoAppend: (Int) -> Unit = {},
+    onMemoEdit: (Int) -> Unit = {},
     viewModel: HomeViewModel = viewModel(factory = ViewModelProvider.Factory),
     modifier: Modifier = Modifier
 ) {
@@ -81,11 +83,11 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            items(items = homeUiState.sections, key = { it.id }) { section ->
+            items(items = homeUiState.memos, key = { it.id }) { memo ->
                 MarkdownCard(
-                    section = section,
-                    onSectionAppend = onSectionAppend,
-                    onSectionEdit = onSectionEdit,
+                    memo = memo,
+                    onMemoAppend = onMemoAppend,
+                    onMemoEdit = onMemoEdit,
                     modifier = Modifier
                         .padding(horizontal = 16.dp, vertical = 8.dp)
                 )
@@ -96,10 +98,10 @@ fun HomeScreen(
 
 @Composable
 fun MarkdownCard(
-    section: Memo,
-    onSectionAppend: (Int) -> Unit = {},
-    onSectionEdit: (Int) -> Unit = {},
-    onSectionClick: () -> Unit = {}, // Not yet supported
+    memo: Memo,
+    onMemoAppend: (Int) -> Unit = {},
+    onMemoEdit: (Int) -> Unit = {},
+    onMemoClick: () -> Unit = {}, // Not yet supported
     modifier: Modifier = Modifier,
 ) {
     var isExpanded by remember { mutableStateOf(false) }
@@ -123,7 +125,7 @@ fun MarkdownCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = section.name,
+                    text = memo.name,
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier
                         .padding(start = 16.dp)
@@ -132,7 +134,7 @@ fun MarkdownCard(
                     modifier = Modifier.weight(1f)
                 )
                 IconButton(
-                    onClick = { onSectionAppend(section.id) },
+                    onClick = { onMemoAppend(memo.id) },
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_add_24),
@@ -140,7 +142,7 @@ fun MarkdownCard(
                     )
                 }
                 IconButton(
-                    onClick = { onSectionEdit(section.id) }
+                    onClick = { onMemoEdit(memo.id) }
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_edit_24),
@@ -169,7 +171,7 @@ fun MarkdownCard(
                     .fillMaxWidth()
             ) {
                 MarkdownText(
-                    markdown = section.content.trimIndent(),
+                    markdown = memo.content.trimIndent(),
                     modifier = Modifier.padding(16.dp)
                 )
             }
@@ -181,6 +183,6 @@ fun MarkdownCard(
 @Composable
 fun MarkdownCardPreview() {
     MemoBoardTheme {
-        MarkdownCard(section = LocalSectionProvider.getAllSections().get(1))
+        MarkdownCard(memo = LocalMemoProvider.getAllMemos()[1])
     }
 }

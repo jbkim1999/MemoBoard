@@ -8,9 +8,9 @@ interface MemoRepository {
 
     fun getMemoById(id: Int): Flow<Memo?>
 
-    suspend fun insertMemo(section: Memo)
+    suspend fun insertMemo(memo: Memo)
 
-    suspend fun updateMemo(section: Memo)
+    suspend fun updateMemo(memo: Memo)
 
-    suspend fun deleteMemo(section: Memo)
+    suspend fun deleteMemo(memo: Memo)
 }
