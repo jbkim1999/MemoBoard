@@ -1,4 +1,4 @@
-package com.example.memoboard.ui.append
+package com.example.memoboard.ui.edit
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -13,31 +13,31 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-class MemoAppendViewModel(
+class MemoEditViewModel(
     savedStateHandle: SavedStateHandle,
     private val memoRepository: MemoRepository
 ) : ViewModel() {
 
-    private val memoId: Int = checkNotNull(savedStateHandle[AppendDestination.memoIdArg])
+    private val memoId: Int = checkNotNull(savedStateHandle[EditDestination.memoIdArg])
 
-    val uiState: StateFlow<MemoAppendUiState> =
+    val uiState: StateFlow<MemoEditUiState> =
         memoRepository.getMemoById(memoId)
             .filterNotNull()
-            .map { MemoAppendUiState(memo = it) }
+            .map { MemoEditUiState(memo = it) }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(TIMEOUT_MILLIS),
-                initialValue = MemoAppendUiState()
+                initialValue = MemoEditUiState()
             )
 
-    fun appendMemo(
+    fun editMemo(
         changedMemoName: String,
         changedMemoContent: String,
         onNavigateBack: () -> Unit
     ) {
         if (changedMemoName.isNotEmpty() && changedMemoContent.isNotEmpty()) {
             uiState.value.memo.name = changedMemoName
-            uiState.value.memo.content += System.lineSeparator() + changedMemoContent
+            uiState.value.memo.content = changedMemoContent
             uiState.value.memo.lastModifiedDate = LocalDateTime.now()
 
             viewModelScope.launch {
@@ -52,6 +52,6 @@ class MemoAppendViewModel(
     }
 }
 
-data class MemoAppendUiState(
+data class MemoEditUiState(
     val memo: Memo = Memo(),
 )

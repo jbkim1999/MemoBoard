@@ -10,6 +10,7 @@ import androidx.navigation.navArgument
 import com.example.memoboard.ui.append.AppendDestination
 import com.example.memoboard.ui.append.MemoAppendScreen
 import com.example.memoboard.ui.edit.EditDestination
+import com.example.memoboard.ui.edit.MemoEditScreen
 import com.example.memoboard.ui.home.HomeDestination
 import com.example.memoboard.ui.home.HomeScreen
 
@@ -38,6 +39,17 @@ fun MemoBoardNavHost(
             })
         ) {
             MemoAppendScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(
+            route = EditDestination.routeWithArgs,
+            arguments = listOf(navArgument(EditDestination.memoIdArg) {
+                type = NavType.IntType
+            })
+        ) {
+            MemoEditScreen(
                 onNavigateBack = { navController.popBackStack() }
             )
         }

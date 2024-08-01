@@ -44,7 +44,7 @@ fun MemoBoardTopAppBar(
     modifier: Modifier = Modifier
 ) {
     var titleClicked by remember {
-        mutableStateOf(true)
+        mutableStateOf(false)
     }
 
     Row(
@@ -112,7 +112,7 @@ fun MemoBoardTopAppBar(
                     Card(
                         shape = RoundedCornerShape(8.dp),
                         modifier = Modifier
-                            .width(200.dp)
+                            .width(240.dp)
                             .padding(bottom = 8.dp)
                             .clickable(
                                 onClick = titleClickedAction
@@ -121,13 +121,11 @@ fun MemoBoardTopAppBar(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth(),
-                            horizontalArrangement = Arrangement.Start
+                            horizontalArrangement = Arrangement.Center
                         ) {
                             Text(
                                 modifier = Modifier.padding(
-                                    start = 16.dp,
-                                    top = 4.dp,
-                                    bottom = 4.dp
+                                    vertical = 4.dp
                                 ),
                                 text = titleClickedActionName,
                                 style = MaterialTheme.typography.bodyLarge,
@@ -146,6 +144,7 @@ fun MemoBoardTopAppBarPreview() {
     MemoBoardTheme {
         MemoBoardTopAppBar(
             title = "Hello World",
+            titleClickedActionName = "Test",
             canNavigateBack = true
         )
     }

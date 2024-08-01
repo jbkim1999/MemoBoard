@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.memoboard.MemoBoardApplication
 import com.example.memoboard.ui.append.MemoAppendViewModel
+import com.example.memoboard.ui.edit.MemoEditViewModel
 import com.example.memoboard.ui.home.HomeViewModel
 
 object ViewModelProvider {
@@ -18,6 +19,12 @@ object ViewModelProvider {
         }
         initializer {
             MemoAppendViewModel(
+                this.createSavedStateHandle(),
+                memoBoardApplication().container.memoRepository
+            )
+        }
+        initializer {
+            MemoEditViewModel(
                 this.createSavedStateHandle(),
                 memoBoardApplication().container.memoRepository
             )

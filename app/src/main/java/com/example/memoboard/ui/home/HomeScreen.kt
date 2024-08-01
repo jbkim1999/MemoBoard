@@ -69,6 +69,8 @@ fun HomeScreen(
                 content = {
                     MemoBoardTopAppBar(
                         title = "Memo Board",
+                        titleClickedActionName = "Create a new memo",
+                        titleClickedAction = {},
                         canNavigateBack = false,
                     )
                 }
