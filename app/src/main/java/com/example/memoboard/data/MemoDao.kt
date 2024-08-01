@@ -14,7 +14,7 @@ interface MemoDao {
     fun getAllMemos(): Flow<List<Memo>>
 
     @Query("SELECT * FROM memos WHERE id = :id")
-    fun getMemoById(id: Int): Flow<Memo>
+    fun getMemoById(id: Int): Flow<Memo?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMemo(memo: Memo)

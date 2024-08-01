@@ -34,17 +34,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.memoboard.MemoBoardTopAppBar
 import com.example.memoboard.R
 import com.example.memoboard.config.ViewModelProvider
-import com.example.memoboard.data.LocalMemoRepository
 import com.example.memoboard.data.LocalMemoProvider
 import com.example.memoboard.data.Memo
 import com.example.memoboard.ui.FlexibleTopBar
+import com.example.memoboard.ui.common.MemoBoardTopAppBar
 import com.example.memoboard.ui.navigation.NavigationDestination
 import com.example.memoboard.ui.theme.MemoBoardTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
-import kotlinx.coroutines.flow.first
 
 object HomeDestination : NavigationDestination {
     override val route = "home"
@@ -171,7 +169,7 @@ fun MarkdownCard(
                     .fillMaxWidth()
             ) {
                 MarkdownText(
-                    markdown = memo.content.trimIndent(),
+                    markdown = memo.content,
                     modifier = Modifier.padding(16.dp)
                 )
             }

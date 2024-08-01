@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 
 class HomeViewModel(
-    private val memoRepository: MemoRepository
+    memoRepository: MemoRepository
 ) : ViewModel() {
 
     val uiState: StateFlow<HomeUiState> =

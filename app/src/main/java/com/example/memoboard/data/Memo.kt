@@ -13,7 +13,7 @@ data class Memo(
     var id: Int = 0,
     var name: String = "",
     var content: String = "",
-    var lastModifiedDate: LocalDateTime
+    var lastModifiedDate: LocalDateTime = LocalDateTime.now()
 ) {
     val lastModifiedFormattedDate: String
         get() {
