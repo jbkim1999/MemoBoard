@@ -19,7 +19,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.memoboard.R
 import com.example.memoboard.config.ViewModelProvider
 import com.example.memoboard.ui.FlexibleTopBar
-import com.example.memoboard.ui.append.AppendDestination
 import com.example.memoboard.ui.common.MemoBoardTopAppBar
 import com.example.memoboard.ui.common.MemoEditCard
 import com.example.memoboard.ui.navigation.NavigationDestination
@@ -38,10 +37,10 @@ fun MemoEditScreen(
     viewModel: MemoEditViewModel = viewModel(factory = ViewModelProvider.Factory),
     modifier: Modifier = Modifier
 ) {
-    val appendUiState by viewModel.uiState.collectAsState()
+    val editUiState by viewModel.uiState.collectAsState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    val memo = appendUiState.memo
+    val memo = editUiState.memo
     var memoName by remember { mutableStateOf("") }
     var memoContent by remember { mutableStateOf("") }
 
@@ -58,16 +57,19 @@ fun MemoEditScreen(
                 scrollBehavior = scrollBehavior,
                 content = {
                     MemoBoardTopAppBar(
-                        title = stringResource(id = AppendDestination.titleRes),
+                        title = stringResource(id = EditDestination.titleRes),
                         titleClickedActionName = "Delete this memo",
-                        titleClickedAction = {},
+                        titleClickedAction = {
+                            viewModel.deleteMemo()
+                            onNavigateBack()
+                        },
                         canNavigateBack = true,
                         navigateUp = {
                             viewModel.editMemo(
                                 changedMemoName = memoName,
                                 changedMemoContent = memoContent,
-                                onNavigateBack = onNavigateBack
                             )
+                            onNavigateBack()
                         }
                     )
                 }
@@ -85,4 +87,3 @@ fun MemoEditScreen(
         )
     }
 }
-

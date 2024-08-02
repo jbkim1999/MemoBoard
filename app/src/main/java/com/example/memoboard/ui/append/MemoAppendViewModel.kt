@@ -33,18 +33,16 @@ class MemoAppendViewModel(
     fun appendMemo(
         changedMemoName: String,
         changedMemoContent: String,
-        onNavigateBack: () -> Unit
     ) {
-        if (changedMemoName.isNotEmpty() && changedMemoContent.isNotEmpty()) {
+        if (changedMemoName.isNotEmpty()) {
             uiState.value.memo.name = changedMemoName
-            uiState.value.memo.content += System.lineSeparator() + changedMemoContent
+            uiState.value.memo.content += if (changedMemoContent.isNotEmpty()) System.lineSeparator() + changedMemoContent else ""
             uiState.value.memo.lastModifiedDate = LocalDateTime.now()
 
             viewModelScope.launch {
                 memoRepository.updateMemo(uiState.value.memo)
             }
         }
-        onNavigateBack()
     }
 
     companion object {

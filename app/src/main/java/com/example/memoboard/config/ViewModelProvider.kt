@@ -7,6 +7,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.memoboard.MemoBoardApplication
 import com.example.memoboard.ui.append.MemoAppendViewModel
+import com.example.memoboard.ui.create.MemoCreateViewModel
 import com.example.memoboard.ui.edit.MemoEditViewModel
 import com.example.memoboard.ui.home.HomeViewModel
 
@@ -14,6 +15,11 @@ object ViewModelProvider {
     val Factory = viewModelFactory {
         initializer {
             HomeViewModel(
+                memoBoardApplication().container.memoRepository
+            )
+        }
+        initializer {
+            MemoCreateViewModel(
                 memoBoardApplication().container.memoRepository
             )
         }

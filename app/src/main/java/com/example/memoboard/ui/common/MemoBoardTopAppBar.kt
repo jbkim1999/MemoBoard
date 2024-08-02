@@ -107,7 +107,6 @@ fun MemoBoardTopAppBar(
                     )
                 }
 
-                // titleClickedActionName is not empty
                 if (titleClickedActionName != "" && titleClicked) {
                     Card(
                         shape = RoundedCornerShape(8.dp),

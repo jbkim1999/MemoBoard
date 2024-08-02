@@ -15,9 +15,10 @@ class HomeViewModel(
 ) : ViewModel() {
 
     val uiState: StateFlow<HomeUiState> =
-        memoRepository.getAllMemos().map {
-            HomeUiState(it)
-        }
+        memoRepository.getAllMemos()
+            .map {
+                HomeUiState(it)
+            }
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000),

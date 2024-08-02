@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CardDefaults
@@ -52,6 +53,7 @@ object HomeDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    onMemoCreate: () -> Unit = {},
     onMemoAppend: (Int) -> Unit = {},
     onMemoEdit: (Int) -> Unit = {},
     viewModel: HomeViewModel = viewModel(factory = ViewModelProvider.Factory),
@@ -70,7 +72,7 @@ fun HomeScreen(
                     MemoBoardTopAppBar(
                         title = "Memo Board",
                         titleClickedActionName = "Create a new memo",
-                        titleClickedAction = {},
+                        titleClickedAction = onMemoCreate,
                         canNavigateBack = false,
                     )
                 }
@@ -124,15 +126,17 @@ fun MarkdownCard(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = memo.name,
-                    style = MaterialTheme.typography.titleMedium,
+                Column(
                     modifier = Modifier
-                        .padding(start = 16.dp)
-                )
-                Spacer(
-                    modifier = Modifier.weight(1f)
-                )
+                        .weight(1f)
+                ) {
+                    Text(
+                        text = memo.name,
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                    )
+                }
                 IconButton(
                     onClick = { onMemoAppend(memo.id) },
                 ) {

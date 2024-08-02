@@ -33,9 +33,8 @@ class MemoEditViewModel(
     fun editMemo(
         changedMemoName: String,
         changedMemoContent: String,
-        onNavigateBack: () -> Unit
     ) {
-        if (changedMemoName.isNotEmpty() && changedMemoContent.isNotEmpty()) {
+        if (changedMemoName.isNotEmpty()) {
             uiState.value.memo.name = changedMemoName
             uiState.value.memo.content = changedMemoContent
             uiState.value.memo.lastModifiedDate = LocalDateTime.now()
@@ -44,7 +43,12 @@ class MemoEditViewModel(
                 memoRepository.updateMemo(uiState.value.memo)
             }
         }
-        onNavigateBack()
+    }
+
+    fun deleteMemo() {
+        viewModelScope.launch {
+            memoRepository.deleteMemo(uiState.value.memo)
+        }
     }
 
     companion object {

@@ -9,6 +9,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.memoboard.ui.append.AppendDestination
 import com.example.memoboard.ui.append.MemoAppendScreen
+import com.example.memoboard.ui.create.CreateDestination
+import com.example.memoboard.ui.create.MemoCreateScreen
 import com.example.memoboard.ui.edit.EditDestination
 import com.example.memoboard.ui.edit.MemoEditScreen
 import com.example.memoboard.ui.home.HomeDestination
@@ -27,8 +29,15 @@ fun MemoBoardNavHost(
         // route is just a string
         composable(route = HomeDestination.route) {
             HomeScreen(
+                onMemoCreate = { navController.navigate(CreateDestination.route) },
                 onMemoAppend = { navController.navigate("${AppendDestination.route}/$it") },
                 onMemoEdit = { navController.navigate("${EditDestination.route}/$it") }
+            )
+        }
+
+        composable(route = CreateDestination.route) {
+            MemoCreateScreen(
+                onNavigateBack = { navController.popBackStack() }
             )
         }
 
