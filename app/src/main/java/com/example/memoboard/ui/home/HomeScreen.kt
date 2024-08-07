@@ -6,11 +6,9 @@ import androidx.compose.animation.core.spring
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CardDefaults
@@ -66,7 +64,8 @@ fun HomeScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             FlexibleTopBar(
-                modifier = Modifier.padding(top = 16.dp),
+                // if padding applied at this level then the top app bar will not know about its contribution to the sizing
+                // modifier = Modifier.padding(top = 16.dp),
                 scrollBehavior = scrollBehavior,
                 content = {
                     MemoBoardTopAppBar(
@@ -74,6 +73,7 @@ fun HomeScreen(
                         titleClickedActionName = "Create a new memo",
                         titleClickedAction = onMemoCreate,
                         canNavigateBack = false,
+                        modifier = Modifier.padding(top = 32.dp)
                     )
                 }
             )

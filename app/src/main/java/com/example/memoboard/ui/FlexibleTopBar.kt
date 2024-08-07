@@ -51,9 +51,9 @@ fun FlexibleTopBar(
     scrollBehavior: TopAppBarScrollBehavior? = null,
     content: @Composable () -> Unit,
 ) {
-    // Sets the app bar's height offset to collapse the entire bar's height when content is scrolled.
+    /* Sets the app bar's height offset to collapse the entire bar's height when content is scrolled. */
     var heightOffsetLimit by remember {
-        mutableFloatStateOf(0f)
+        mutableFloatStateOf(0f) // don't care about 0f it's gonna get reset anyways
     }
     LaunchedEffect(heightOffsetLimit) {
         if (scrollBehavior?.state?.heightOffsetLimit != heightOffsetLimit) {
@@ -68,11 +68,17 @@ fun FlexibleTopBar(
     val colorTransitionFraction = scrollBehavior?.state?.overlappedFraction ?: 0f
     val fraction = if (colorTransitionFraction > 0.01f) 1f else 0f
     val appBarContainerColor by animateColorAsState(
-        targetValue = colors.containerColor(fraction),
+        targetValue = colors.containerColor(fraction), // targetValue 까지 이 animation 효과로 변함
         animationSpec = spring(stiffness = Spring.StiffnessMediumLow)
-    ) // 0 or 1
+    )
 
-    // Set up support for resizing the top app bar when vertically dragging the bar itself.
+//    // Log the overlappedFraction
+//    LaunchedEffect(appBarContainerColor) {
+//        // Log appBarContainerColor.value
+//        Log.d("FlexibleTopBar", "appBarContainerColor: ${appBarContainerColor.value}")
+//    }
+
+    /* Set up support for resizing the top app bar when vertically dragging the bar itself. */
     val appBarDragModifier = if (scrollBehavior != null && !scrollBehavior.isPinned) {
         Modifier.draggable(
             orientation = Orientation.Vertical,
@@ -96,7 +102,9 @@ fun FlexibleTopBar(
     The surface's background color is animated as specified above.
     The height of the app bar is determined by subtracting the bar's height offset from the
     app bar's defined constant height value (i.e. the ContainerHeight token). */
-    Surface(modifier = modifier.then(appBarDragModifier), color = appBarContainerColor) {
+    Surface(
+        modifier = modifier.then(appBarDragModifier), color = appBarContainerColor
+    ) {
         Layout(
             content = content,
             modifier = modifier,
@@ -105,6 +113,7 @@ fun FlexibleTopBar(
                 heightOffsetLimit = placeable.height.toFloat() * -1
                 val scrollOffset = scrollBehavior?.state?.heightOffset ?: 0f
                 val height = placeable.height.toFloat() + scrollOffset
+                // val width = placeable.width
                 val layoutHeight = height.roundToInt()
                 layout(constraints.maxWidth, layoutHeight) {
                     placeable.place(0, scrollOffset.toInt())
@@ -225,10 +234,10 @@ class FlexibleTopBarColors internal constructor(
 object FlexibleTopBarDefaults {
     @Composable
     fun topAppBarColors(
-        containerColor: Color = MaterialTheme.colorScheme.background, // todo
+        containerColor: Color = Color.Transparent,
         scrolledContainerColor: Color = MaterialTheme.colorScheme.applyTonalElevation(
             backgroundColor = containerColor,
-            elevation = 4.dp
+            elevation = 0.dp // no elevation even when scrolled
         ),
     ): FlexibleTopBarColors =
         FlexibleTopBarColors(

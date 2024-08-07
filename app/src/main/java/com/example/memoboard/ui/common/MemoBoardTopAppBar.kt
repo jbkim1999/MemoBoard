@@ -48,7 +48,7 @@ fun MemoBoardTopAppBar(
     }
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .animateContentSize(
                 animationSpec = spring(
@@ -59,7 +59,7 @@ fun MemoBoardTopAppBar(
         horizontalArrangement = Arrangement.Center
     ) {
         OutlinedCard(
-            modifier = modifier
+            modifier = Modifier
                 .width(260.dp),
             shape = RoundedCornerShape(16.dp),
         ) {
