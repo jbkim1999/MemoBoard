@@ -2,6 +2,8 @@ package com.example.memoboard.config
 
 import android.content.Context
 import com.example.memoboard.data.DBMemoRepository
+import com.example.memoboard.data.LocalMemoProvider
+import com.example.memoboard.data.LocalMemoRepository
 import com.example.memoboard.data.MemoDatabase
 import com.example.memoboard.data.MemoRepository
 

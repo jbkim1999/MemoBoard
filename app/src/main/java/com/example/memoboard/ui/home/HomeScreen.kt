@@ -24,12 +24,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -64,12 +65,12 @@ fun HomeScreen(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             FlexibleTopBar(
-                // if padding applied at this level then the top app bar will not know about its contribution to the sizing
                 // modifier = Modifier.padding(top = 16.dp),
+                // if padding applied at this level then the top app bar will not know about its contribution to the sizing
                 scrollBehavior = scrollBehavior,
                 content = {
                     MemoBoardTopAppBar(
-                        title = "Memo Board",
+                        title = stringResource(id = R.string.app_name),
                         titleClickedActionName = "Create a new memo",
                         titleClickedAction = onMemoCreate,
                         canNavigateBack = false,
@@ -106,7 +107,7 @@ fun MarkdownCard(
     onMemoClick: () -> Unit = {}, // Not yet supported
     modifier: Modifier = Modifier,
 ) {
-    var isExpanded by remember { mutableStateOf(false) }
+    var isExpanded by rememberSaveable { mutableStateOf(false) }
 
     Column(
         modifier = modifier
@@ -135,6 +136,7 @@ fun MarkdownCard(
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier
                             .padding(start = 16.dp)
+                            .padding(vertical = 8.dp)
                     )
                 }
                 IconButton(
