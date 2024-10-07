@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.memoboard"
+    namespace = "com.jbjbjb.memoboard"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.memoboard"
+        applicationId = "com.jbjbjb.memoboard"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
