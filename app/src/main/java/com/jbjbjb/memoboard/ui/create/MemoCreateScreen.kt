@@ -1,5 +1,6 @@
 package com.jbjbjb.memoboard.ui.create
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -30,6 +31,10 @@ fun MemoCreateScreen(
     modifier: Modifier = Modifier
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    BackHandler(onBack = {
+        viewModel.createMemo()
+        onNavigateBack()
+    })
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

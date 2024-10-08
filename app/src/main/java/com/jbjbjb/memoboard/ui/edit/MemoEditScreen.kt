@@ -1,5 +1,6 @@
 package com.jbjbjb.memoboard.ui.edit
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -48,6 +49,14 @@ fun MemoEditScreen(
         memoName = memo.name
         memoContent = memo.content
     } // kinda like useEffect?
+
+    BackHandler(onBack = {
+        viewModel.editMemo(
+            changedMemoName = memoName,
+            changedMemoContent = memoContent,
+        )
+        onNavigateBack()
+    })
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

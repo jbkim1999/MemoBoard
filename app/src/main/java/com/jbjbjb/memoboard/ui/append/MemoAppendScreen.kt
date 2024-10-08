@@ -1,5 +1,6 @@
 package com.jbjbjb.memoboard.ui.append
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -48,6 +49,14 @@ fun MemoAppendScreen(
         memoName = memo.name
         memoContent = "" // since append
     } // kinda like useEffect?
+
+    BackHandler(onBack = {
+        viewModel.appendMemo(
+            changedMemoName = memoName,
+            changedMemoContent = memoContent,
+        )
+        onNavigateBack()
+    })
 
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),

@@ -2,8 +2,6 @@ package com.jbjbjb.memoboard.config
 
 import android.content.Context
 import com.jbjbjb.memoboard.data.DBMemoRepository
-import com.jbjbjb.memoboard.data.LocalMemoProvider
-import com.jbjbjb.memoboard.data.LocalMemoRepository
 import com.jbjbjb.memoboard.data.MemoDatabase
 import com.jbjbjb.memoboard.data.MemoRepository
 
@@ -13,7 +11,7 @@ interface AppContainer {
 
 class AppDataContainer(private val context: Context) : AppContainer {
     override val memoRepository: MemoRepository by lazy {
-        LocalMemoRepository(LocalMemoProvider)
-        // DBMemoRepository(MemoDatabase.getDatabase(context).memoDao())
+        // LocalMemoRepository(LocalMemoProvider)
+        DBMemoRepository(MemoDatabase.getDatabase(context).memoDao())
     }
 }
