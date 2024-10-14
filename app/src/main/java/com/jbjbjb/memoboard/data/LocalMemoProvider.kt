@@ -40,7 +40,23 @@ object LocalMemoProvider {
         ),
     )
 
+    private val introMemo = Memo(
+        0, "Welcome!",
+        """
+            ## Touch the top bar to use more of MemoBoard!
+            - MemoBoard is an easy-to-use memo application
+              - With efficient **Markdown** format
+            ```
+            boolean canWriteCode = true;
+            ```
+        """.trimIndent(), LocalDateTime.now()
+    )
+
     fun getAllMemos(): MutableList<Memo> {
         return memoList
+    }
+
+    fun getIntroMemo(): Memo {
+        return introMemo
     }
 }

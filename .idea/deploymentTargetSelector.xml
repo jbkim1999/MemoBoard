@@ -2,9 +2,9 @@
 <project version="4">
   <component name="deploymentTargetSelector">
     <selectionStates>
-      <SelectionState runConfigName="app">
+      <SelectionState runConfigName="MarkdownCardPreview">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-07T08:22:25.645592Z">
+        <DropdownSelection timestamp="2024-10-14T08:16:41.036667Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=/Users/jbkim_99/.android/avd/Pixel_8_API_33.avd" />
@@ -13,7 +13,7 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="MarkdownCardPreview">
+      <SelectionState runConfigName="MemoBoard">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
