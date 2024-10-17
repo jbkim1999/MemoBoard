@@ -43,10 +43,12 @@ fun MemoEditScreen(
 
     val memo = editUiState.memo
     var memoName by remember { mutableStateOf("") }
+    var originalMemoContent by remember { mutableStateOf("") }
     var memoContent by remember { mutableStateOf("") }
 
     LaunchedEffect(memo.name, memo.content) {
         memoName = memo.name
+        originalMemoContent = memo.content
         memoContent = memo.content
     } // kinda like useEffect?
 
@@ -92,7 +94,8 @@ fun MemoEditScreen(
             onMemoContentChange = { memoContent = it },
             modifier = Modifier
                 .padding(innerPadding)
-                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
+            originalMemoContent = originalMemoContent
         )
     }
 }
