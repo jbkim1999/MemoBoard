@@ -83,7 +83,7 @@ fun HomeScreen(
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(innerPadding)
         ) {
             items(items = homeUiState.memos, key = { it.id }) { memo ->
