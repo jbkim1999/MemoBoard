@@ -28,11 +28,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jbjbjb.memoboard.R
 import com.jbjbjb.memoboard.data.LocalMemoProvider
 import com.jbjbjb.memoboard.ui.theme.MemoBoardTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
@@ -100,7 +102,7 @@ fun MemoEditCard(
                 ) {
                     Text(
                         fontWeight = if (isWrite) FontWeight.ExtraBold else FontWeight.Normal,
-                        text = "What you write"
+                        text = stringResource(R.string.write_tab)
                     )
                 }
                 TextButton(
@@ -108,7 +110,7 @@ fun MemoEditCard(
                 ) {
                     Text(
                         fontWeight = if (!isWrite) FontWeight.ExtraBold else FontWeight.Normal,
-                        text = "What you see"
+                        text = stringResource(R.string.see_tab)
                     )
                 }
             }

@@ -71,7 +71,7 @@ fun HomeScreen(
                 content = {
                     MemoBoardTopAppBar(
                         title = stringResource(id = R.string.app_name),
-                        titleClickedActionName = "Create a new memo",
+                        titleClickedActionName = stringResource(R.string.create_action),
                         titleClickedAction = onMemoCreate,
                         canNavigateBack = false,
                         modifier = Modifier.padding(top = 32.dp)

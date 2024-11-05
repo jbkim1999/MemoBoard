@@ -69,7 +69,7 @@ fun MemoEditScreen(
                 content = {
                     MemoBoardTopAppBar(
                         title = stringResource(id = EditDestination.titleRes),
-                        titleClickedActionName = "Delete this memo",
+                        titleClickedActionName = stringResource(R.string.delete_action),
                         titleClickedAction = {
                             viewModel.deleteMemo()
                             onNavigateBack()

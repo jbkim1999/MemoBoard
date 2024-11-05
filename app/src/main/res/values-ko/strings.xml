@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="create_title">메모 만들기</string>
+    <string name="append_title">메모에 추가하기</string>
+    <string name="edit_title">메모 수정하기</string>
+    <string name="delete_action">메모 삭제하기</string>
+    <string name="write_tab">작성 화면</string>
+    <string name="see_tab">보이는 화면</string>
+    <string name="create_action">메모 만들기</string>
+</resources>

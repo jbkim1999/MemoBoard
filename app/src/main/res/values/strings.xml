@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">MemoBoard</string>
+    <string name="app_name" translatable="false">MemoBoard</string>
     <string name="create_title">Create a Memo</string>
     <string name="append_title">Append to Memo</string>
     <string name="edit_title">Edit a Memo</string>
+    <string name="create_action">Create a new memo</string>
+    <string name="delete_action">Delete this memo</string>
+    <string name="write_tab">What you write</string>
+    <string name="see_tab">What you see</string>
 </resources>
